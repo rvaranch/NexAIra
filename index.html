@@ -1,1 +1,68 @@
-<h1>Hello NexAIra</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Launching Soon</title>
+  <meta name="description" content="We are launching soon." />
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #f5f7ff, #ffffff 55%, #f3f4f6);
+      color: #111827;
+    }
+    .card {
+      width: min(640px, 92vw);
+      padding: 32px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(17, 24, 39, 0.08);
+      box-shadow: 0 12px 40px rgba(17, 24, 39, 0.10);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 5vw, 40px); letter-spacing: -0.02em; }
+    p { margin: 0; font-size: 16px; line-height: 1.6; color: #374151; }
+    .badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(59, 130, 246, 0.12);
+      color: #1d4ed8;
+    }
+    footer { margin-top: 18px; font-size: 12px; color: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      body { background: radial-gradient(circle at top, #111827, #0b1220 60%, #060a12); color: #f9fafb; }
+      .card { background: rgba(17, 24, 39, 0.65); border-color: rgba(255, 255, 255, 0.10); }
+      p { color: #cbd5e1; }
+      footer { color: #94a3b8; }
+      .badge { background: rgba(59, 130, 246, 0.18); color: #93c5fd; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="badge">Coming Soon</div>
+    <h1>We’re Launching Soon</h1>
+    <p>
+      We’re working hard behind the scenes to bring you something great.
+      Please check back shortly for updates.
+    </p>
+    <footer>© <span id="year"></span> All rights reserved.</footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
