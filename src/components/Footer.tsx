@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">
-              Nex<span className="text-yellow-400">A</span>ira <span className="text-sm text-gray-500">Tech Services LLP</span>
+              Nex<span className="text-yellow-400">AI</span>ra <span className="text-sm text-gray-500">Tech Services LLP</span>
             </h3>
             <p className="text-gray-400">
               Shaping the next generation through quality technology education and consulting.

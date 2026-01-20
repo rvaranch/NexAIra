@@ -17,7 +17,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <span className="text-2xl font-bold text-white">
-              Nex<span className="text-yellow-400">A</span>ira
+              Nex<span className="text-yellow-400">AI</span>ra
             </span>
             <span className="ml-2 text-sm text-gray-400 hidden sm:block">Tech Services LLP</span>
           </div>

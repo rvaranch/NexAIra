@@ -8,7 +8,7 @@ export default function Hero() {
           <div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
               <span className="text-white">
-                Nex<span className="text-yellow-400">A</span>ira
+                Nex<span className="text-yellow-400">AI</span>ra
               </span>
               <br />
               <span className="text-3xl sm:text-4xl lg:text-5xl text-gray-400">
