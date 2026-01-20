@@ -1,4 +1,4 @@
-import { ArrowRight, Brain, Cloud, Database, Cpu, Lightbulb } from 'lucide-react';
+import { ArrowRight, Brain, Cloud, Database, Cpu, Lightbulb, Code } from 'lucide-react';
 
 export default function Services() {
   const services = [
@@ -26,6 +26,11 @@ export default function Services() {
       icon: Cpu,
       title: 'Embedded Systems',
       description: 'Deep dive into embedded systems programming, IoT, and hardware-software integration.',
+    },
+    {
+      icon: Code,
+      title: 'Java Full Stack',
+      description: 'Build robust web applications with Java backend and modern frontend technologies. Master full stack development.',
     },
   ];
 
