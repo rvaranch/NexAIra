@@ -9,8 +9,17 @@ export default defineConfig({
   },
   server: {
     headers: {
-      'Content-Type': 'application/javascript',
+      'Content-Type': 'application/javascript; charset=utf-8',
     },
-    middlewareMode: false,
+    hmr: {
+      protocol: 'wss',
+      host: 'localhost',
+      port: 443,
+    },
+  },
+  preview: {
+    headers: {
+      'Content-Type': 'application/javascript; charset=utf-8',
+    },
   },
 });

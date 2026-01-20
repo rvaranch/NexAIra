@@ -1,5 +1,4 @@
-rm -rf node_modules package-lock.json
-npm installimport { ArrowRight, Brain, Cloud, Database, Cpu, Lightbulb, Code } from 'lucide-react';
+import { ArrowRight, Brain, Cloud, Database, Cpu, Lightbulb, Code } from 'lucide-react';
 
 export default function Services() {
   const services = [
