@@ -8,16 +8,12 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    middlewareMode: true,
-    hmr: {
-      protocol: 'wss',
-      host: 'localhost',
-      port: 443,
-    },
+    host: '0.0.0.0',
+    port: 5173,
+    hmr: false,
   },
   preview: {
-    headers: {
-      'X-Content-Type-Options': 'nosniff',
-    },
+    host: '0.0.0.0',
+    port: 4173,
   },
 });
