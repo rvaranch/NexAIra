@@ -8,9 +8,7 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    headers: {
-      'Content-Type': 'application/javascript; charset=utf-8',
-    },
+    middlewareMode: true,
     hmr: {
       protocol: 'wss',
       host: 'localhost',
@@ -19,7 +17,7 @@ export default defineConfig({
   },
   preview: {
     headers: {
-      'Content-Type': 'application/javascript; charset=utf-8',
+      'X-Content-Type-Options': 'nosniff',
     },
   },
 });
