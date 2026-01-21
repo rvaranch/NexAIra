@@ -54,7 +54,7 @@ export default function Contact() {
               HNO 23-5/2, 2nd floor,<br />
               Chunnambattiwada,<br />
               Mancherial - 504208<br />
-              Opp: i planet Mancherial
+              Landmark: Beside Sonovision
             </p>
           </div>
         </div>
