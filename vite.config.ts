@@ -11,9 +11,17 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     hmr: false,
+    middleware: true,
   },
   preview: {
     host: '0.0.0.0',
     port: 4173,
+  },
+  build: {
+    target: 'esnext',
+    minify: 'terser',
+  },
+  resolve: {
+    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
   },
 });
