@@ -6,8 +6,10 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Features', href: '#features' },
+    { name: 'About', href: '#about' },
+    { name: 'Training Programs', href: '#training-programs' },
+    { name: 'AI Marketing Agency', href: '/ai-marketing-agency' },
+    { name: 'Why NexAIra', href: '#why-nexaira' },
     { name: 'Contact', href: '#contact' },
   ];
 
