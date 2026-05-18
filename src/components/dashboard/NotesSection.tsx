@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   FileText, File, FileSpreadsheet, Image, Video,
-  FolderOpen, Folder, ChevronDown, ChevronUp, Download, Loader,
+  FolderOpen, Folder, ChevronDown, ChevronUp, Download,
   AlertCircle, RefreshCw, BookMarked
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -29,44 +29,21 @@ const FILE_STYLES: Record<string, { icon: any; color: string; bg: string; label:
 };
 
 function NoteFileRow({ file }: { file: NoteFile }) {
-  const [downloading, setDownloading] = useState(false);
-  const [dlError, setDlError]         = useState('');
   const cfg = FILE_STYLES[file.fileType] ?? FILE_STYLES.file;
   const Icon = cfg.icon;
 
-  const handleDownload = async () => {
-    setDownloading(true);
-    setDlError('');
-    try {
-      // Fetch from Zoho public share URL
-      // Files must be shared as "Anyone with link can view" in WorkDrive
-      const zohoUrl = `https://workdrive.zoho.in/file/${file.id}`;
-      
-      const res = await fetch(zohoUrl);
-      if (!res.ok) throw new Error(`Download failed (${res.status})`);
-
-      const blob    = await res.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      const anchor  = document.createElement('a');
-      anchor.href     = blobUrl;
-      anchor.download = file.name;
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-      URL.revokeObjectURL(blobUrl);
-    } catch (err: any) {
-      // If direct fetch fails due to CORS, open in new tab as fallback
-      setDlError('');
-      const anchor  = document.createElement('a');
-      anchor.href     = `https://workdrive.zoho.in/file/${file.id}`;
-      anchor.target   = '_blank';
-      anchor.download = file.name;
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-    } finally {
-      setDownloading(false);
-    }
+  const handleDownload = () => {
+    // Use Zoho's direct download URL — triggers browser download directly
+    // without opening the Zoho viewer page
+    const downloadUrl = `https://workdrive.zoho.in/download/${file.id}`;
+    const anchor = document.createElement('a');
+    anchor.href     = downloadUrl;
+    anchor.download = file.name;
+    anchor.target   = '_blank';
+    anchor.rel      = 'noopener noreferrer';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
   };
 
   return (
@@ -79,7 +56,6 @@ function NoteFileRow({ file }: { file: NoteFile }) {
       {/* Title */}
       <div className="flex-1 min-w-0">
         <p className="text-white text-sm font-medium truncate">{file.title}</p>
-        {dlError && <p className="text-red-400 text-xs mt-0.5">{dlError}</p>}
       </div>
 
       {/* File type badge */}
@@ -90,15 +66,11 @@ function NoteFileRow({ file }: { file: NoteFile }) {
       {/* Download button */}
       <button
         onClick={handleDownload}
-        disabled={downloading}
         title={`Download ${file.name}`}
-        className="flex-shrink-0 flex items-center gap-1.5 bg-gray-800 hover:bg-yellow-400 text-gray-300 hover:text-black px-3 py-1.5 rounded-lg text-xs font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed border border-gray-700 hover:border-yellow-400"
+        className="flex-shrink-0 flex items-center gap-1.5 bg-gray-800 hover:bg-yellow-400 text-gray-300 hover:text-black px-3 py-1.5 rounded-lg text-xs font-medium transition-all border border-gray-700 hover:border-yellow-400"
       >
-        {downloading
-          ? <Loader size={13} className="animate-spin" />
-          : <Download size={13} />
-        }
-        <span className="hidden sm:block">{downloading ? 'Downloading...' : 'Download'}</span>
+        <Download size={13} />
+        <span className="hidden sm:block">Download</span>
       </button>
     </div>
   );
