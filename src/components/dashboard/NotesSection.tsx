@@ -6,7 +6,6 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
 
 type NoteFile = {
   type: 'file'; id: string; name: string; title: string;
@@ -39,21 +38,16 @@ function NoteFileRow({ file }: { file: NoteFile }) {
     setDownloading(true);
     setDlError('');
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      const token = session?.access_token;
-      if (!token) throw new Error('Not authenticated');
-
-      const res = await fetch(
-        `${SUPABASE_URL}/functions/v1/zoho-download?file_id=${file.id}&filename=${encodeURIComponent(file.name)}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
+      // Fetch from Zoho public share URL
+      // Files must be shared as "Anyone with link can view" in WorkDrive
+      const zohoUrl = `https://workdrive.zoho.in/file/${file.id}`;
+      
+      const res = await fetch(zohoUrl);
       if (!res.ok) throw new Error(`Download failed (${res.status})`);
 
-      // Trigger browser download
-      const blob     = await res.blob();
-      const blobUrl  = URL.createObjectURL(blob);
-      const anchor   = document.createElement('a');
+      const blob    = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const anchor  = document.createElement('a');
       anchor.href     = blobUrl;
       anchor.download = file.name;
       document.body.appendChild(anchor);
@@ -61,7 +55,15 @@ function NoteFileRow({ file }: { file: NoteFile }) {
       document.body.removeChild(anchor);
       URL.revokeObjectURL(blobUrl);
     } catch (err: any) {
-      setDlError(err.message ?? 'Download failed');
+      // If direct fetch fails due to CORS, open in new tab as fallback
+      setDlError('');
+      const anchor  = document.createElement('a');
+      anchor.href     = `https://workdrive.zoho.in/file/${file.id}`;
+      anchor.target   = '_blank';
+      anchor.download = file.name;
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
     } finally {
       setDownloading(false);
     }
