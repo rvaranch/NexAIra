@@ -78,22 +78,36 @@ function NoteFolderBlock({ folder, depth = 0 }: { folder: NoteFolder; depth?: nu
 
   return (
     <div className={depth > 0 ? 'border-l-2 border-gray-800 ml-4' : ''}>
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-800/40 transition-colors text-left"
-      >
-        <div className="flex items-center gap-3">
-          {expanded
-            ? <FolderOpen size={18} className="text-yellow-400 flex-shrink-0" />
-            : <Folder    size={18} className="text-gray-500 flex-shrink-0" />
-          }
-          <div>
-            <p className="text-white text-sm font-medium">{folder.name}</p>
-            <p className="text-gray-500 text-xs mt-0.5">{fileCount} file{fileCount !== 1 ? 's' : ''}</p>
+      <div className="flex items-center justify-between px-6 py-4 hover:bg-gray-800/40 transition-colors">
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="flex items-center gap-3 flex-1 text-left"
+        >
+          <div className="flex items-center gap-3">
+            {expanded
+              ? <FolderOpen size={18} className="text-yellow-400 flex-shrink-0" />
+              : <Folder    size={18} className="text-gray-500 flex-shrink-0" />
+            }
+            <div>
+              <p className="text-white text-sm font-medium">{folder.name}</p>
+              <p className="text-gray-500 text-xs mt-0.5">{fileCount} file{fileCount !== 1 ? 's' : ''}</p>
+            </div>
+          </div>
+        </button>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <button
+            onClick={() => window.open(`https://workdrive.zohoexternal.in/folder/${folder.id}`, '_blank', 'noopener,noreferrer')}
+            title="Open folder in Zoho (select all to download as zip)"
+            className="flex items-center gap-1.5 bg-gray-800 hover:bg-yellow-400 text-gray-300 hover:text-black px-3 py-1.5 rounded-lg text-xs font-medium transition-all border border-gray-700 hover:border-yellow-400"
+          >
+            <Download size={13} />
+            <span className="hidden sm:block">Open Folder</span>
+          </button>
+          <div className="text-gray-500 ml-1">
+            {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
         </div>
-        {expanded ? <ChevronUp size={16} className="text-gray-500" /> : <ChevronDown size={16} className="text-gray-500" />}
-      </button>
+      </div>
 
       {expanded && (
         <div className="divide-y divide-gray-800/60">
