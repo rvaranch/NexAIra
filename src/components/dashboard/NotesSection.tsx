@@ -33,16 +33,7 @@ function NoteFileRow({ file }: { file: NoteFile }) {
   const Icon = cfg.icon;
 
   const handleDownload = () => {
-    // Zoho WorkDrive external share download URL format
-    const downloadUrl = `https://workdrive.zohoexternal.in/download/${file.id}`;
-    const anchor = document.createElement('a');
-    anchor.href     = downloadUrl;
-    anchor.download = file.name;
-    anchor.target   = '_blank';
-    anchor.rel      = 'noopener noreferrer';
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+    window.open(`https://workdrive.zoho.in/file/${file.id}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -65,11 +56,11 @@ function NoteFileRow({ file }: { file: NoteFile }) {
       {/* Download button */}
       <button
         onClick={handleDownload}
-        title={`Download ${file.name}`}
+        title={`Open ${file.name}`}
         className="flex-shrink-0 flex items-center gap-1.5 bg-gray-800 hover:bg-yellow-400 text-gray-300 hover:text-black px-3 py-1.5 rounded-lg text-xs font-medium transition-all border border-gray-700 hover:border-yellow-400"
       >
         <Download size={13} />
-        <span className="hidden sm:block">Download</span>
+        <span className="hidden sm:block">Open</span>
       </button>
     </div>
   );
