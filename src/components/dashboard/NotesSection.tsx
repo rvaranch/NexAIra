@@ -33,9 +33,8 @@ function NoteFileRow({ file }: { file: NoteFile }) {
   const Icon = cfg.icon;
 
   const handleDownload = () => {
-    // Use Zoho's direct download URL — triggers browser download directly
-    // without opening the Zoho viewer page
-    const downloadUrl = `https://workdrive.zoho.in/download/${file.id}`;
+    // Zoho WorkDrive external share download URL format
+    const downloadUrl = `https://workdrive.zohoexternal.in/download/${file.id}`;
     const anchor = document.createElement('a');
     anchor.href     = downloadUrl;
     anchor.download = file.name;
